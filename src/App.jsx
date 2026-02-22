@@ -298,6 +298,7 @@ const Philosophy = () => {
 };
 
 // --- 5. PROTOCOL ("Sticky Stacking Archive") ---
+// --- 5. PROTOCOL ("Sticky Stacking Archive") ---
 const Protocol = () => {
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
@@ -305,24 +306,26 @@ const Protocol = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       cardsRef.current.forEach((card, i) => {
+        // Pin the card (pinSpacing: false allows the next card to slide over it, except the last one)
         ScrollTrigger.create({
           trigger: card,
           start: 'top 10%',
           end: '+=100%',
           pin: true,
-          pinSpacing: true,
+          pinSpacing: i === cardsRef.current.length - 1,
         });
 
-        // Blur and scale down effect as the next card comes up
-        if (i < cardsRef.current.length - 1) {
+        // The exit animation for the underlying card triggers exactly when the next card enters the viewport
+        const nextCard = cardsRef.current[i + 1];
+        if (nextCard) {
           gsap.to(card, {
             scale: 0.9,
-            filter: 'blur(10px)',
-            opacity: 0.4,
+            filter: 'blur(20px)',
+            opacity: 0.2, // Clean fade
             scrollTrigger: {
-              trigger: card,
-              start: 'top 10%',
-              end: '+=100%',
+              trigger: nextCard,
+              start: 'top 90%',
+              end: 'top 10%',
               scrub: true,
             }
           });
@@ -334,74 +337,87 @@ const Protocol = () => {
 
   const protocols = [
     {
-      num: '01', title: 'Digital Consultation', desc: '3D spatial mapping of your oral architecture in a relaxed environment.',
+      num: '01',
+      title: 'Digital Consultation',
+      desc: '3D spatial mapping of your oral architecture in a relaxed environment.',
+      image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop', // relatable to spatial mapping/clinical
       RenderVisual: () => (
-        <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-[0_10px_20px_rgba(6,182,212,0.15)]">
-          <path d="M10 100 L100 50 L190 100 L100 150 Z" fill="rgba(255,255,255,0.4)" stroke="rgba(6,182,212,0.2)" strokeWidth="1" />
-          <path d="M10 120 L100 70 L190 120 L100 170 Z" fill="none" stroke="rgba(6,182,212,0.1)" strokeWidth="0.5" />
-          <path d="M10 140 L100 90 L190 140 L100 190 Z" fill="none" stroke="rgba(6,182,212,0.05)" strokeWidth="0.5" />
-          <path d="M50 110 Q100 160 150 110 Q160 90 130 70 Q100 80 70 70 Q40 90 50 110 Z" fill="rgba(255,255,255,0.6)" stroke="#06B6D4" strokeWidth="1.5" strokeLinejoin="round" />
-          <path d="M60 105 Q100 140 140 105 Q145 95 125 80 Q100 85 75 80 Q55 95 60 105 Z" fill="none" stroke="#0F172A" strokeWidth="0.5" opacity="0.3" />
-          <path d="M20 90 L180 10 L195 20 L35 100 Z" fill="url(#scanGradient)" opacity="0.8" className="animate-[pulse_3s_ease-in-out_infinite]" />
-          <defs>
-            <linearGradient id="scanGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#06B6D4" stopOpacity="0.8" /><stop offset="100%" stopColor="white" stopOpacity="0" /></linearGradient>
-          </defs>
-        </svg>
-      )
-    },
-    {
-      num: '02', title: 'Precision Blueprint', desc: 'Transparent outlining of timeline, biological impact, and clear costs.',
-      RenderVisual: () => (
-        <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-[0_10px_20px_rgba(6,182,212,0.1)]">
-          <path d="M80 160 Q100 190 120 160 L130 110 Q100 120 70 110 Z" fill="rgba(255,255,255,0.3)" stroke="rgba(6,182,212,0.2)" strokeWidth="1" />
-          <path d="M100 115 L100 175" stroke="#06B6D4" strokeWidth="2" strokeLinecap="round" className="animate-[pulse_2s_ease-in-out_infinite]" />
-          <path d="M70 100 Q100 130 130 100 L140 50 Q100 40 60 50 Z" fill="rgba(255,255,255,0.5)" stroke="rgba(15,23,42,0.1)" strokeWidth="1" />
-          <path d="M85 90 L85 60 M100 100 L100 55 M115 90 L115 60" stroke="#06B6D4" strokeWidth="0.5" opacity="0.5" />
-          <path d="M50 40 Q100 20 150 40 Q160 80 140 100 Q100 90 60 100 Q40 80 50 40 Z" fill="rgba(255,255,255,0.7)" stroke="#0F172A" strokeWidth="1" opacity="0.8" />
-          <path d="M60 50 Q100 35 140 50" stroke="white" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      )
-    },
-    {
-      num: '03', title: 'Guided Transformation', desc: 'Silent execution under profound anesthetic protocol. Zero discomfort.',
-      RenderVisual: () => (
-        <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-[0_5px_15px_rgba(6,182,212,0.2)]">
-          <g className="animate-[spin_10s_linear_infinite]" style={{ transformOrigin: 'center' }}>
-            <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(15,23,42,0.1)" strokeWidth="1" />
-            <ellipse cx="100" cy="100" rx="70" ry="25" fill="none" stroke="rgba(6,182,212,0.3)" strokeWidth="1" />
-            <ellipse cx="100" cy="100" rx="25" ry="70" fill="none" stroke="rgba(6,182,212,0.3)" strokeWidth="1" />
-            <circle cx="100" cy="100" r="30" fill="rgba(255,255,255,0.8)" stroke="#06B6D4" strokeWidth="2" />
-            <path d="M85 85 L115 115 M115 85 L85 115 M100 75 L100 125 M75 100 L125 100" stroke="#0F172A" strokeWidth="1" opacity="0.3" />
+        <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+          <g className="animate-[spin_15s_linear_infinite]" style={{ transformOrigin: 'center' }}>
+            <polygon points="50,10 90,30 90,70 50,90 10,70 10,30" fill="none" stroke="#06B6D4" strokeWidth="0.5" />
+            <polygon points="50,20 80,40 80,60 50,80 20,60 20,40" fill="rgba(255,255,255,0.1)" stroke="#0F172A" strokeWidth="0.5" className="opacity-80" />
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#06B6D4" strokeWidth="0.5" strokeDasharray="2 4" />
           </g>
-          <ellipse cx="100" cy="180" rx="60" ry="10" fill="url(#holoHole)" />
-          <defs><radialGradient id="holoHole" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#06B6D4" stopOpacity="0.4" /><stop offset="100%" stopColor="transparent" stopOpacity="0" /></radialGradient></defs>
+        </svg>
+      )
+    },
+    {
+      num: '02',
+      title: 'Precision Blueprint',
+      desc: 'Transparent outlining of timeline, biological impact, and clear costs.',
+      image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2600&auto=format&fit=crop', // relatable to blueprint/architecture
+      RenderVisual: () => (
+        <div className="w-full h-full relative overflow-hidden flex items-center justify-center p-4">
+          <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-2 opacity-30">
+            {Array.from({ length: 36 }).map((_, idx) => (
+              <div key={idx} className="border border-slate-400 rounded-[2px]"></div>
+            ))}
+          </div>
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-accent shadow-[0_0_15px_#06B6D4] animate-[scan_3s_ease-in-out_infinite]" style={{ animationDirection: 'alternate' }}></div>
+          <style>{`@keyframes scan { from { top: 0; } to { top: 100%; } }`}</style>
+        </div>
+      )
+    },
+    {
+      num: '03',
+      title: 'Guided Transformation',
+      desc: 'Silent execution under profound anesthetic protocol. Zero discomfort.',
+      image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2600&auto=format&fit=crop', // relatable to tranquil hospital/transformation
+      RenderVisual: () => (
+        <svg viewBox="0 0 200 100" className="w-full h-full overflow-visible drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]">
+          <path d="M0,50 L50,50 L60,20 L75,90 L90,10 L105,70 L115,50 L200,50"
+            fill="none"
+            stroke="#06B6D4"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="400"
+            strokeDashoffset="400"
+            className="animate-[pulseWave_3s_linear_infinite]"
+          />
+          <style>{`@keyframes pulseWave { 0% { stroke-dashoffset: 400; } 50% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -400; } }`}</style>
         </svg>
       )
     }
   ];
 
   return (
-    <section ref={containerRef} id="protocol" className="py-24 md:py-32 px-6 pb-64 bg-background">
-      <div className="max-w-5xl mx-auto flex flex-col items-center gap-24">
-        <div className="text-center">
+    <section ref={containerRef} id="protocol" className="py-24 md:py-32 px-6 pb-64 bg-background overflow-visible">
+      <div className="max-w-5xl mx-auto flex flex-col items-center gap-24 relative">
+        <div className="text-center relative z-0 mb-12">
           <h2 className="font-sans font-bold text-primary text-4xl md:text-5xl tracking-tight">Clinical Protocol</h2>
           <p className="font-mono text-sm uppercase tracking-widest text-primary/50 mt-6">A systematic methodology for comfort.</p>
         </div>
 
-        <div className="w-full relative mt-12">
+        <div className="w-full relative mt-12 flex flex-col gap-[30vh]">
           {protocols.map((p, i) => (
             <div
               key={p.num}
               ref={el => cardsRef.current[i] = el}
-              className={`w-full min-h-[60vh] md:min-h-[70vh] bg-white/40 backdrop-blur-2xl rounded-[3rem] p-8 md:p-16 flex border border-white/60 shadow-[0_30px_60px_rgba(15,23,42,0.05),inset_0_0_0_1px_rgba(255,255,255,0.8)] mb-12 origin-top`}
+              className={`w-full min-h-[60vh] md:min-h-[70vh] bg-white rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row border border-slate-100 shadow-[0_-10px_50px_rgba(15,23,42,0.06)] origin-top`}
+              style={{ zIndex: i + 1 }}
             >
-              <div className="flex flex-col md:flex-row gap-12 w-full">
-                <div className="flex-1 flex flex-col justify-center gap-6 pr-8">
-                  <span className="font-mono text-accent text-xl font-bold">[{p.num}]</span>
-                  <h3 className="font-sans font-bold text-3xl md:text-5xl text-primary tracking-tight leading-tight">{p.title}</h3>
-                  <p className="font-serif italic text-primary/70 text-xl md:text-2xl leading-relaxed max-w-lg mt-4">{p.desc}</p>
-                </div>
-                <div className="flex-1 min-h-[250px] relative bg-gradient-to-br from-white/60 to-transparent backdrop-blur-md rounded-[2rem] p-6 flex items-center justify-center border border-white/80 shadow-[inset_0_2px_20px_rgba(255,255,255,0.8)]">
+              <div className="flex-1 flex flex-col justify-center gap-6 pr-8 z-10">
+                <span className="font-mono text-accent text-xl font-bold">[{p.num}]</span>
+                <h3 className="font-sans font-bold text-3xl md:text-5xl text-primary tracking-tight leading-tight">{p.title}</h3>
+                <p className="font-serif italic text-primary/70 text-xl md:text-2xl leading-relaxed max-w-lg mt-4">{p.desc}</p>
+              </div>
+              <div className="flex-1 min-h-[250px] md:min-h-[400px] relative bg-offWhite rounded-[2rem] overflow-hidden flex items-center justify-center border border-slate-100 shadow-inner z-10">
+                {/* Descriptive Background Image */}
+                <img src={p.image} className="absolute inset-0 w-full h-full object-cover opacity-20 filter grayscale mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent"></div>
+                {/* 2.5D Animated SVG Overlay */}
+                <div className="relative z-20 w-full h-full p-8 flex items-center justify-center">
                   <p.RenderVisual />
                 </div>
               </div>
