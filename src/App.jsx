@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CheckCircle2, ChevronRight } from 'lucide-react';
+import PrivacyPolicy from './PrivacyPolicy';
+import TermsOfService from './TermsOfService';
+import Accessibility from './Accessibility';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,11 +31,11 @@ const Navbar = () => {
       ref={navRef}
       className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[3rem] w-[90%] max-w-4xl border border-transparent shadow-[0_4px_30px_rgba(0,0,0,0.02)]"
     >
-      <div className="font-sans text-lg font-bold tracking-tight">ATL Perio Group</div>
+      <a href="/" className="font-sans text-lg font-bold tracking-tight">ATL Perio Group</a>
       <div className="hidden md:flex items-center gap-8 font-serif italic text-[1.1rem]">
-        <a href="#philosophy" className="transition-colors link-hover hover:text-accent">Philosophy</a>
-        <a href="#features" className="transition-colors link-hover hover:text-accent">Method</a>
-        <a href="#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
+        <a href="/#philosophy" className="transition-colors link-hover hover:text-accent">Philosophy</a>
+        <a href="/#features" className="transition-colors link-hover hover:text-accent">Method</a>
+        <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
       </div>
       <button
         onClick={() => window.open("https://book.modento.io/atlanta-periodontal-group", "_blank")}
@@ -302,7 +306,6 @@ const Philosophy = () => {
 };
 
 // --- 5. PROTOCOL ("Sticky Stacking Archive") ---
-// --- 5. PROTOCOL ("Sticky Stacking Archive") ---
 const Protocol = () => {
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
@@ -310,7 +313,6 @@ const Protocol = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       cardsRef.current.forEach((card, i) => {
-        // Pin the card (pinSpacing: false allows the next card to slide over it, except the last one)
         ScrollTrigger.create({
           trigger: card,
           start: 'top 10%',
@@ -319,13 +321,12 @@ const Protocol = () => {
           pinSpacing: i === cardsRef.current.length - 1,
         });
 
-        // The exit animation for the underlying card triggers exactly when the next card enters the viewport
         const nextCard = cardsRef.current[i + 1];
         if (nextCard) {
           gsap.to(card, {
             scale: 0.9,
             filter: 'blur(20px)',
-            opacity: 0.2, // Clean fade
+            opacity: 0.2,
             scrollTrigger: {
               trigger: nextCard,
               start: 'top 90%',
@@ -344,7 +345,7 @@ const Protocol = () => {
       num: '01',
       title: 'Comprehensive Periodontal Evaluation',
       desc: 'Advanced 3D imaging, digital diagnostics, and a comprehensive assessment of your gums, bone, and oral health to develop a treatment plan tailored to you.',
-      image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop', // relatable to spatial mapping/clinical
+      image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop',
       RenderVisual: () => (
         <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]">
           <g className="animate-[spin_15s_linear_infinite]" style={{ transformOrigin: 'center' }}>
@@ -358,8 +359,8 @@ const Protocol = () => {
     {
       num: '02',
       title: 'Personalized Treatment Plan',
-      desc: 'We’ll review your diagnosis, discuss every treatment option, explain your timeline, answer your questions, and provide transparent pricing before treatment begins.',
-      image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2600&auto=format&fit=crop', // relatable to blueprint/architecture
+      desc: "We'll review your diagnosis, discuss every treatment option, explain your timeline, answer your questions, and provide transparent pricing before treatment begins.",
+      image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2600&auto=format&fit=crop',
       RenderVisual: () => (
         <div className="relative flex items-center justify-center w-full h-full p-4 overflow-hidden">
           <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-2 opacity-30">
@@ -376,7 +377,7 @@ const Protocol = () => {
       num: '03',
       title: 'Precision Periodontal Care',
       desc: 'From dental implants and gum grafting to laser therapy and periodontal surgery, our team delivers advanced treatment with modern techniques designed to maximize comfort and long-term results.',
-      image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2600&auto=format&fit=crop', // relatable to tranquil hospital/transformation
+      image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2600&auto=format&fit=crop',
       RenderVisual: () => (
         <svg viewBox="0 0 200 100" className="w-full h-full overflow-visible drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]">
           <path d="M0,50 L50,50 L60,20 L75,90 L90,10 L105,70 L115,50 L200,50"
@@ -417,10 +418,8 @@ const Protocol = () => {
                 <p className="max-w-lg mt-4 font-serif text-xl italic leading-relaxed text-primary/70 md:text-2xl">{p.desc}</p>
               </div>
               <div className="flex-1 min-h-[250px] md:min-h-[400px] relative bg-offWhite rounded-[2rem] overflow-hidden flex items-center justify-center border border-slate-100 shadow-inner z-10">
-                {/* Descriptive Background Image */}
                 <img src={p.image} className="absolute inset-0 object-cover w-full h-full opacity-20 filter grayscale mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent"></div>
-                {/* 2.5D Animated SVG Overlay */}
                 <div className="relative z-20 flex items-center justify-center w-full h-full p-8">
                   <p.RenderVisual />
                 </div>
@@ -442,12 +441,12 @@ const CTASection = () => {
 
         <h2 className="relative z-10 font-serif italic text-5xl md:text-[5rem] text-primary leading-none">Begin the process.</h2>
         <p className="relative z-10 max-w-xl mt-8 font-sans text-lg text-primary/80">
-          Whether you’re experiencing gum recession, periodontal disease, missing teeth, or have been referred by your dentist, we’re here to help you restore your oral health with confidence.
+          Whether you're experiencing gum recession, periodontal disease, missing teeth, or have been referred by your dentist, we're here to help you restore your oral health with confidence.
         </p>
 
         <div className="relative z-10 mt-12 w-full max-w-md bg-white/60 backdrop-blur-2xl rounded-[2rem] p-8 border border-white shadow-2xl">
           <div className="mb-6 font-mono text-xs font-bold tracking-widest uppercase text-primary/60">Initial Assessment</div>
-          <div className="mb-8 font-sans text-4xl font-bold tracking-tight text-primary">Complimentary</div>
+          <div className="mb-8 font-sans text-4xl font-bold tracking-tight text-primary">Book</div>
 
           <button
               onClick={() => window.open("https://book.modento.io/atlanta-periodontal-group", "_blank")} className="w-full magnetic-button bg-gradient-to-r from-accent to-[#0ea5e9] text-white px-8 py-4 rounded-full font-sans font-bold text-lg mb-4 shadow-[inset_0_2px_10px_rgba(255,255,255,0.4),0_10px_30px_rgba(6,182,212,0.3)] hover:brightness-110 transition-all"
@@ -482,8 +481,8 @@ const Footer = () => {
         <div className="grid grid-cols-2 gap-12 font-sans text-sm">
           <div className="flex flex-col gap-4 text-white/70">
             <div className="mb-2 font-mono text-xs font-semibold tracking-widest text-white uppercase">Practice</div>
-            <a href="#philosophy" className="transition-colors link-hover hover:text-accent">Philosophy</a>
-            <a href="#protocol" className="transition-colors link-hover hover:text-accent">Methodology</a>
+            <a href="/#philosophy" className="transition-colors link-hover hover:text-accent">Philosophy</a>
+            <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Methodology</a>
             <a href="https://www.google.com/search?q=Atlanta-Periodontal-Group#reviews" className="transition-colors link-hover hover:text-accent">Patient Reviews</a>
           </div>
           <div className="flex flex-col gap-4 text-white/70">
@@ -508,7 +507,22 @@ const Footer = () => {
   );
 };
 
+// --- 8. MAIN APP WITH ROUTING ---
 function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/accessibility" element={<Accessibility />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+// --- 9. HOMEPAGE COMPONENT ---
+function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
