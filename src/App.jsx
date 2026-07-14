@@ -27,14 +27,17 @@ const Navbar = () => {
       ref={navRef}
       className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[3rem] w-[90%] max-w-4xl border border-transparent shadow-[0_4px_30px_rgba(0,0,0,0.02)]"
     >
-      <div className="font-sans font-bold text-lg tracking-tight">Apex.</div>
+      <div className="font-sans text-lg font-bold tracking-tight">ATL Perio Group</div>
       <div className="hidden md:flex items-center gap-8 font-serif italic text-[1.1rem]">
-        <a href="#philosophy" className="link-hover hover:text-accent transition-colors">Philosophy</a>
-        <a href="#features" className="link-hover hover:text-accent transition-colors">Method</a>
-        <a href="#protocol" className="link-hover hover:text-accent transition-colors">Protocol</a>
+        <a href="#philosophy" className="transition-colors link-hover hover:text-accent">Philosophy</a>
+        <a href="#features" className="transition-colors link-hover hover:text-accent">Method</a>
+        <a href="#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
       </div>
-      <button className="magnetic-button bg-gradient-to-r from-accent to-[#0ea5e9] text-white px-5 py-2 rounded-full font-sans font-medium text-sm flex items-center gap-2 shadow-[inset_0_2px_10px_rgba(255,255,255,0.4),0_5px_15px_rgba(6,182,212,0.3)]">
-        <span className="relative z-10 block">Consultation</span>
+      <button
+        onClick={() => window.open("https://book.modento.io/atlanta-periodontal-group", "_blank")}
+        className="magnetic-button bg-gradient-to-r from-accent to-[#0ea5e9] text-white px-5 py-2 rounded-full font-sans font-medium text-sm flex items-center gap-2 shadow-[inset_0_2px_10px_rgba(255,255,255,0.4),0_5px_15px_rgba(6,182,212,0.3)]"
+      >
+      <span className="relative z-10 block">Consultation</span>
       </button>
     </nav>
   );
@@ -64,25 +67,26 @@ const Hero = () => {
         <img
           src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop"
           alt="Abstract clinical environment"
-          className="w-full h-full object-cover opacity-30 mix-blend-multiply filter grayscale"
+          className="object-cover w-full h-full opacity-30 mix-blend-multiply filter grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent"></div>
       </div>
 
       <div className="relative z-10 max-w-5xl text-primary">
         <h1 className="flex flex-col gap-1 md:gap-2">
-          <span className="hero-element font-sans font-bold text-3xl md:text-5xl lg:text-6xl tracking-tighter text-primary">Dentistry is the</span>
-          <span className="hero-element font-serif italic text-7xl md:text-[8rem] lg:text-[10rem] leading-[0.85] text-accent font-medium">Art of Precision.</span>
+          <span className="font-sans text-3xl font-bold tracking-tighter hero-element md:text-5xl lg:text-6xl text-primary">Atlanta's best</span>
+          <span className="hero-element font-serif italic text-7xl md:text-[8rem] lg:text-[10rem] leading-[0.85] text-accent font-medium">Periodontist.</span>
         </h1>
-        <p className="hero-element mt-10 md:mt-12 font-mono text-sm md:text-base text-primary/70 max-w-md">
-          Apex Dental Studio — Advanced, pain-free cosmetic and general dentistry tailored to your biological profile.
+        <p className="max-w-md mt-10 font-mono text-sm hero-element md:mt-12 md:text-base text-primary/70">
+          Missing teeth? Bleeding gums? Gum recession? Our board-certified periodontal specialists provide advanced implant and gum treatments with personalized care.
         </p>
-        <div className="hero-element mt-10 flex gap-4">
-          <button className="magnetic-button bg-gradient-to-r from-accent to-[#0ea5e9] text-white px-8 py-4 rounded-full font-sans font-semibold flex items-center gap-2 shadow-[inset_0_2px_10px_rgba(255,255,255,0.4),0_10px_30px_rgba(6,182,212,0.3)] border border-white/20">
-            <span className="relative z-10 block">Book Your Free Consultation</span>
-            <ChevronRight className="w-5 h-5 relative z-10" />
-          </button>
-        </div>
+        <div className="flex gap-4 mt-10 hero-element">
+           <button onClick={() => window.open("https://book.modento.io/atlanta-periodontal-group", "_blank")} className="magnetic-button bg-gradient-to-r from-accent to-[#0ea5e9] text-white px-8 py-4 rounded-full font-sans font-semibold flex items-center gap-2 shadow-[inset_0_2px_10px_rgba(255,255,255,0.4),0_10px_30px_rgba(6,182,212,0.3)] border border-white/20"
+         >
+         <span className="relative z-10 block">Book Your Free Consultation</span>
+         <ChevronRight className="relative z-10 w-5 h-5" />
+         </button>
+         </div>
       </div>
     </section>
   );
@@ -111,8 +115,8 @@ const ShufflerCard = () => {
   return (
     <div className="bg-background rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-primary/5 flex flex-col justify-between h-[360px] relative overflow-hidden group">
       <div>
-        <h3 className="font-sans font-bold text-xl text-primary tracking-tight">Cosmetic Specialists</h3>
-        <p className="font-serif italic text-dark/60 mt-2 text-lg">Award-winning precision</p>
+        <h3 className="font-sans text-xl font-bold tracking-tight text-primary">#1 Rated Periodontist in ATL</h3>
+        <p className="mt-2 font-serif text-lg italic text-dark/60">⭐️ 637 4.9 Google Reviews</p>
       </div>
       <div className="relative h-48 mt-8 perspective-1000">
         {items.map((item, index) => {
@@ -165,10 +169,10 @@ const TypewriterCard = () => {
 
   return (
     <div className="bg-background rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-primary/5 flex flex-col justify-between h-[360px]">
-      <div className="flex justify-between items-start">
+      <div className="flex items-start justify-between">
         <div>
-          <h3 className="font-sans font-bold text-xl text-primary tracking-tight">Spa-Like Environment</h3>
-          <p className="font-serif italic text-dark/60 mt-2 text-lg">Stress-free experience</p>
+          <h3 className="font-sans text-xl font-bold tracking-tight text-primary">Spa-Like Environment</h3>
+          <p className="mt-2 font-serif text-lg italic text-dark/60">Stress-free experience</p>
         </div>
         <div className="flex items-center gap-2 bg-primary/5 px-3 py-1.5 rounded-full">
           <div className="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
@@ -212,12 +216,12 @@ const SchedulerCard = () => {
   return (
     <div className="bg-background rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-primary/5 flex flex-col justify-between h-[360px]" ref={svgRef}>
       <div>
-        <h3 className="font-sans font-bold text-xl text-primary tracking-tight">Transparent Pricing</h3>
-        <p className="font-serif italic text-dark/60 mt-2 text-lg">Upfront, always</p>
+        <h3 className="font-sans text-xl font-bold tracking-tight text-primary">Personalized Treatment Plans</h3>
+        <p className="mt-2 font-serif text-lg italic text-dark/60">Designed for your smile, your health, and your goals.</p>
       </div>
 
-      <div className="relative h-48 w-full mt-8 border border-primary/10 rounded-2xl p-4 bg-white select-none">
-        <div className="grid grid-cols-7 gap-1 md:gap-2 mb-4">
+      <div className="relative w-full h-48 p-4 mt-8 bg-white border select-none border-primary/10 rounded-2xl">
+        <div className="grid grid-cols-7 gap-1 mb-4 md:gap-2">
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
             <div key={i} className="text-center font-mono text-[10px] text-dark/40">{d}</div>
           ))}
@@ -228,11 +232,11 @@ const SchedulerCard = () => {
           ))}
         </div>
         <div className="flex justify-end mt-4">
-          <div className="save-btn bg-primary text-background px-4 py-1.5 rounded-full font-mono text-[10px] uppercase shadow-sm">Review Cost</div>
+          <div className="save-btn bg-primary text-background px-4 py-1.5 rounded-full font-mono text-[10px] uppercase shadow-sm">View Your Treatment Plan</div>
         </div>
 
         <svg
-          className="cursor-svg absolute top-0 left-0 w-6 h-6 z-10 pointer-events-none drop-shadow-md"
+          className="absolute top-0 left-0 z-10 w-6 h-6 pointer-events-none cursor-svg drop-shadow-md"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -250,8 +254,8 @@ const SchedulerCard = () => {
 
 const Features = () => {
   return (
-    <section id="features" className="py-24 md:py-32 px-6 md:px-16 container mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <section id="features" className="container px-6 py-24 mx-auto md:py-32 md:px-16">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <ShufflerCard />
         <TypewriterCard />
         <SchedulerCard />
@@ -280,17 +284,17 @@ const Philosophy = () => {
         <img
           src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2600&auto=format&fit=crop"
           alt="Clinical architecture texture"
-          className="w-full h-full object-cover filter grayscale"
+          className="object-cover w-full h-full filter grayscale"
         />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-8 md:gap-16 items-center text-center">
-        <p className="phil-line font-mono text-sm md:text-base text-primary/60 uppercase tracking-widest max-w-md">
-          Most dentistry focuses on: rapid volume.
+      <div className="relative z-10 flex flex-col items-center max-w-4xl gap-8 mx-auto text-center md:gap-16">
+        <p className="max-w-md font-mono text-sm tracking-widest uppercase phil-line md:text-base text-primary/60">
+          Most dental offices treat teeth.
         </p>
-        <h2 className="flex flex-col gap-2 items-center">
-          <span className="phil-line font-sans font-bold text-3xl md:text-5xl tracking-tight">We focus on:</span>
-          <span className="phil-line font-serif italic text-6xl md:text-[8rem] mt-2 block leading-none">Precision <span className="text-accent drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]">comfort.</span></span>
+        <h2 className="flex flex-col items-center gap-2">
+          <span className="font-sans text-3xl font-bold tracking-tight phil-line md:text-5xl">We protect the foundation of your smile.</span>
+          <span className="phil-line font-serif italic text-6xl md:text-[8rem] mt-2 block leading-none">Lasting <span className="text-accent drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]">Confidence.</span></span>
         </h2>
       </div>
     </section>
@@ -338,8 +342,8 @@ const Protocol = () => {
   const protocols = [
     {
       num: '01',
-      title: 'Digital Consultation',
-      desc: '3D spatial mapping of your oral architecture in a relaxed environment.',
+      title: 'Comprehensive Periodontal Evaluation',
+      desc: 'Advanced 3D imaging, digital diagnostics, and a comprehensive assessment of your gums, bone, and oral health to develop a treatment plan tailored to you.',
       image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop', // relatable to spatial mapping/clinical
       RenderVisual: () => (
         <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]">
@@ -353,11 +357,11 @@ const Protocol = () => {
     },
     {
       num: '02',
-      title: 'Precision Blueprint',
-      desc: 'Transparent outlining of timeline, biological impact, and clear costs.',
+      title: 'Personalized Treatment Plan',
+      desc: 'We’ll review your diagnosis, discuss every treatment option, explain your timeline, answer your questions, and provide transparent pricing before treatment begins.',
       image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2600&auto=format&fit=crop', // relatable to blueprint/architecture
       RenderVisual: () => (
-        <div className="w-full h-full relative overflow-hidden flex items-center justify-center p-4">
+        <div className="relative flex items-center justify-center w-full h-full p-4 overflow-hidden">
           <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-2 opacity-30">
             {Array.from({ length: 36 }).map((_, idx) => (
               <div key={idx} className="border border-slate-400 rounded-[2px]"></div>
@@ -370,8 +374,8 @@ const Protocol = () => {
     },
     {
       num: '03',
-      title: 'Guided Transformation',
-      desc: 'Silent execution under profound anesthetic protocol. Zero discomfort.',
+      title: 'Precision Periodontal Care',
+      desc: 'From dental implants and gum grafting to laser therapy and periodontal surgery, our team delivers advanced treatment with modern techniques designed to maximize comfort and long-term results.',
       image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2600&auto=format&fit=crop', // relatable to tranquil hospital/transformation
       RenderVisual: () => (
         <svg viewBox="0 0 200 100" className="w-full h-full overflow-visible drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]">
@@ -392,11 +396,11 @@ const Protocol = () => {
   ];
 
   return (
-    <section ref={containerRef} id="protocol" className="py-24 md:py-32 px-6 pb-64 bg-background overflow-visible">
-      <div className="max-w-5xl mx-auto flex flex-col items-center gap-24 relative">
-        <div className="text-center relative z-0 mb-12">
-          <h2 className="font-sans font-bold text-primary text-4xl md:text-5xl tracking-tight">Clinical Protocol</h2>
-          <p className="font-mono text-sm uppercase tracking-widest text-primary/50 mt-6">A systematic methodology for comfort.</p>
+    <section ref={containerRef} id="protocol" className="px-6 py-24 pb-64 overflow-visible md:py-32 bg-background">
+      <div className="relative flex flex-col items-center max-w-5xl gap-24 mx-auto">
+        <div className="relative z-0 mb-12 text-center">
+          <h2 className="font-sans text-4xl font-bold tracking-tight text-primary md:text-5xl">Clinical Protocol</h2>
+          <p className="mt-6 font-mono text-sm tracking-widest uppercase text-primary/50">A systematic methodology for comfort.</p>
         </div>
 
         <div className="w-full relative mt-12 flex flex-col gap-[30vh]">
@@ -407,17 +411,17 @@ const Protocol = () => {
               className={`w-full min-h-[60vh] md:min-h-[70vh] bg-white rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row border border-slate-100 shadow-[0_-10px_50px_rgba(15,23,42,0.06)] origin-top`}
               style={{ zIndex: i + 1 }}
             >
-              <div className="flex-1 flex flex-col justify-center gap-6 pr-8 z-10">
-                <span className="font-mono text-accent text-xl font-bold">[{p.num}]</span>
-                <h3 className="font-sans font-bold text-3xl md:text-5xl text-primary tracking-tight leading-tight">{p.title}</h3>
-                <p className="font-serif italic text-primary/70 text-xl md:text-2xl leading-relaxed max-w-lg mt-4">{p.desc}</p>
+              <div className="z-10 flex flex-col justify-center flex-1 gap-6 pr-8">
+                <span className="font-mono text-xl font-bold text-accent">[{p.num}]</span>
+                <h3 className="font-sans text-3xl font-bold leading-tight tracking-tight md:text-5xl text-primary">{p.title}</h3>
+                <p className="max-w-lg mt-4 font-serif text-xl italic leading-relaxed text-primary/70 md:text-2xl">{p.desc}</p>
               </div>
               <div className="flex-1 min-h-[250px] md:min-h-[400px] relative bg-offWhite rounded-[2rem] overflow-hidden flex items-center justify-center border border-slate-100 shadow-inner z-10">
                 {/* Descriptive Background Image */}
-                <img src={p.image} className="absolute inset-0 w-full h-full object-cover opacity-20 filter grayscale mix-blend-multiply" />
+                <img src={p.image} className="absolute inset-0 object-cover w-full h-full opacity-20 filter grayscale mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent"></div>
                 {/* 2.5D Animated SVG Overlay */}
-                <div className="relative z-20 w-full h-full p-8 flex items-center justify-center">
+                <div className="relative z-20 flex items-center justify-center w-full h-full p-8">
                   <p.RenderVisual />
                 </div>
               </div>
@@ -432,24 +436,29 @@ const Protocol = () => {
 // --- 6. CTA / PRICING ---
 const CTASection = () => {
   return (
-    <section className="py-24 px-6 md:px-16 container mx-auto">
+    <section className="container px-6 py-24 mx-auto md:px-16">
       <div className="bg-primary/5 rounded-[3rem] overflow-hidden relative p-12 md:p-24 flex flex-col items-center text-center shadow-[inset_0_0_100px_rgba(0,0,0,0.02)] border border-primary/10">
         <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
 
         <h2 className="relative z-10 font-serif italic text-5xl md:text-[5rem] text-primary leading-none">Begin the process.</h2>
-        <p className="relative z-10 font-sans mt-8 text-primary/80 max-w-xl text-lg">
-          Experience dentistry engineered for those who demand precision and absolute comfort.
+        <p className="relative z-10 max-w-xl mt-8 font-sans text-lg text-primary/80">
+          Whether you’re experiencing gum recession, periodontal disease, missing teeth, or have been referred by your dentist, we’re here to help you restore your oral health with confidence.
         </p>
 
         <div className="relative z-10 mt-12 w-full max-w-md bg-white/60 backdrop-blur-2xl rounded-[2rem] p-8 border border-white shadow-2xl">
-          <div className="font-mono text-xs uppercase tracking-widest text-primary/60 mb-6 font-bold">Initial Assessment</div>
-          <div className="font-sans text-primary text-4xl tracking-tight font-bold mb-8">Complimentary</div>
+          <div className="mb-6 font-mono text-xs font-bold tracking-widest uppercase text-primary/60">Initial Assessment</div>
+          <div className="mb-8 font-sans text-4xl font-bold tracking-tight text-primary">Complimentary</div>
 
-          <button className="w-full magnetic-button bg-gradient-to-r from-accent to-[#0ea5e9] text-white px-8 py-4 rounded-full font-sans font-bold text-lg mb-4 shadow-[inset_0_2px_10px_rgba(255,255,255,0.4),0_10px_30px_rgba(6,182,212,0.3)] hover:brightness-110 transition-all">
-            <span className="relative z-10">Schedule Online</span>
+          <button
+              onClick={() => window.open("https://book.modento.io/atlanta-periodontal-group", "_blank")} className="w-full magnetic-button bg-gradient-to-r from-accent to-[#0ea5e9] text-white px-8 py-4 rounded-full font-sans font-bold text-lg mb-4 shadow-[inset_0_2px_10px_rgba(255,255,255,0.4),0_10px_30px_rgba(6,182,212,0.3)] hover:brightness-110 transition-all"
+       >
+          <span className="relative z-10">Consultation</span>
           </button>
-          <button className="w-full magnetic-button bg-white/50 text-primary border border-primary/10 px-8 py-4 rounded-full font-sans font-semibold hover:bg-white transition-all shadow-sm">
-            <span className="relative z-10">Call Studio</span>
+          <button
+              onClick={() => window.location.href = "tel:+17709945678"}
+              className="w-full px-8 py-4 font-sans font-semibold transition-all border rounded-full shadow-sm magnetic-button bg-white/50 text-primary border-primary/10 hover:bg-white"
+    >
+          <span className="relative z-10">Call Us</span>
           </button>
         </div>
       </div>
@@ -461,36 +470,36 @@ const CTASection = () => {
 const Footer = () => {
   return (
     <footer className="bg-primary text-white rounded-t-[4rem] px-6 md:px-16 py-16 md:py-24 mt-24 shadow-[0_-20px_50px_rgba(15,23,42,0.1)]">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-16 md:gap-8">
+      <div className="flex flex-col justify-between gap-16 mx-auto max-w-7xl md:flex-row md:gap-8">
 
         <div className="max-w-sm">
-          <div className="font-sans font-bold text-3xl tracking-tight mb-4 text-white">Apex.</div>
-          <p className="font-serif italic text-white/70 text-lg">
-            Advanced, pain-free cosmetic and general dentistry.
+          <div className="mb-4 font-sans text-3xl font-bold tracking-tight text-white">ATL Perio Group</div>
+          <p className="font-serif text-lg italic text-white/70">
+            Atlanta's best Periodontist.
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-12 font-sans text-sm">
           <div className="flex flex-col gap-4 text-white/70">
-            <div className="text-white font-semibold font-mono text-xs uppercase tracking-widest mb-2">Practice</div>
-            <a href="#philosophy" className="link-hover hover:text-accent transition-colors">Philosophy</a>
-            <a href="#protocol" className="link-hover hover:text-accent transition-colors">Methodology</a>
-            <a href="#features" className="link-hover hover:text-accent transition-colors">Patient Stories</a>
+            <div className="mb-2 font-mono text-xs font-semibold tracking-widest text-white uppercase">Practice</div>
+            <a href="#philosophy" className="transition-colors link-hover hover:text-accent">Philosophy</a>
+            <a href="#protocol" className="transition-colors link-hover hover:text-accent">Methodology</a>
+            <a href="https://www.google.com/search?q=Atlanta-Periodontal-Group#reviews" className="transition-colors link-hover hover:text-accent">Patient Reviews</a>
           </div>
           <div className="flex flex-col gap-4 text-white/70">
-            <div className="text-white font-semibold font-mono text-xs uppercase tracking-widest mb-2">Legal</div>
-            <a href="#" className="hover:text-accent transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-accent transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-accent transition-colors">Accessibility</a>
+            <div className="mb-2 font-mono text-xs font-semibold tracking-widest text-white uppercase">Legal</div>
+            <a href="/privacy" className="transition-colors hover:text-accent">Privacy Policy</a>
+            <a href="/terms" className="transition-colors hover:text-accent">Terms of Service</a>
+            <a href="/accessibility" className="transition-colors hover:text-accent">Accessibility</a>
           </div>
         </div>
 
       </div>
 
-      <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="font-mono text-xs text-white/40">© {new Date().getFullYear()} Apex Dental Studio. All rights reserved.</p>
+      <div className="flex flex-col items-center justify-between gap-4 pt-8 mx-auto mt-24 border-t max-w-7xl border-white/10 md:flex-row">
+        <p className="font-mono text-xs text-white/40">© {new Date().getFullYear()} ATL Perio Group. All rights reserved.</p>
 
-        <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10 shadow-inner">
+        <div className="flex items-center gap-3 px-4 py-2 border rounded-full shadow-inner bg-white/5 border-white/10">
           <div className="w-2 h-2 rounded-full bg-accent shadow-[0_0_8px_#06B6D4] animate-pulse"></div>
           <span className="font-mono text-[10px] uppercase tracking-wider text-white/70">Systems Operational</span>
         </div>
@@ -501,7 +510,7 @@ const Footer = () => {
 
 function App() {
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
       <Features />
