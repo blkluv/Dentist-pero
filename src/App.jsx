@@ -6,7 +6,8 @@ import { CheckCircle2, ChevronRight, ChevronDown } from 'lucide-react';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfService from './TermsOfService';
 import Accessibility from './Accessibility';
-import LANAP from './LANAP';
+// TODO: Create these files and uncomment the imports below
+// import LANAP from './LANAP';
 import LaserTherapy from './LaserTherapy';
 import DentalImplants from './DentalImplants';
 import GuidedBoneTissueRegeneration from './GuidedBoneTissueRegeneration';
@@ -14,7 +15,7 @@ import AestheticCrownLengthening from './AestheticCrownLengthening';
 import FunctionalCrownLengthening from './FunctionalCrownLengthening';
 import Frenectomy from './Frenectomy';
 import OsseousSurgery from './OsseousSurgery';
-import ScalingAndRootPlaning from './ScalingAndRootPlaning';
+// import ScalingAndRootPlaning from './ScalingAndRootPlaning';
 import PeriodontalMaintenance from './PeriodontalMaintenance';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -588,7 +589,8 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/accessibility" element={<Accessibility />} />
-        <Route path="/lanap" element={<LANAP />} />
+        {/* Uncomment below and create the corresponding files to enable these pages */}
+        {/* <Route path="/lanap" element={<LANAP />} /> */}
         <Route path="/laser-therapy" element={<LaserTherapy />} />
         <Route path="/dental-implants" element={<DentalImplants />} />
         <Route path="/guided-bone-regeneration" element={<GuidedBoneTissueRegeneration />} />
@@ -596,7 +598,7 @@ function App() {
         <Route path="/crown-lengthening" element={<FunctionalCrownLengthening />} />
         <Route path="/frenectomy" element={<Frenectomy />} />
         <Route path="/osseous-surgery" element={<OsseousSurgery />} />
-        <Route path="/scaling-root-planing" element={<ScalingAndRootPlaning />} />
+        {/* <Route path="/scaling-root-planing" element={<ScalingAndRootPlaning />} /> */}
         <Route path="/periodontal-maintenance" element={<PeriodontalMaintenance />} />
       </Routes>
     </BrowserRouter>
