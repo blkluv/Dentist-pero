@@ -2,16 +2,27 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CheckCircle2, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ChevronDown } from 'lucide-react';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfService from './TermsOfService';
 import Accessibility from './Accessibility';
+import LANAP from './LANAP';
+import LaserTherapy from './LaserTherapy';
+import DentalImplants from './DentalImplants';
+import GuidedBoneTissueRegeneration from './GuidedBoneTissueRegeneration';
+import AestheticCrownLengthening from './AestheticCrownLengthening';
+import FunctionalCrownLengthening from './FunctionalCrownLengthening';
+import Frenectomy from './Frenectomy';
+import OsseousSurgery from './OsseousSurgery';
+import ScalingAndRootPlaning from './ScalingAndRootPlaning';
+import PeriodontalMaintenance from './PeriodontalMaintenance';
 
 gsap.registerPlugin(ScrollTrigger);
 
 // --- 1. NAVBAR ("The Floating Island") ---
 const Navbar = () => {
   const navRef = useRef(null);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -26,6 +37,19 @@ const Navbar = () => {
     return () => ctx.revert();
   }, []);
 
+  const services = [
+    { name: 'Periodontal Maintenance', path: '/periodontal-maintenance' },
+    { name: 'Scaling and Root Planing', path: '/scaling-root-planing' },
+    { name: 'Osseous Surgery', path: '/osseous-surgery' },
+    { name: 'Frenectomy', path: '/frenectomy' },
+    { name: 'Functional Crown Lengthening', path: '/crown-lengthening' },
+    { name: 'Aesthetic Crown Lengthening', path: '/aesthetic-crown-lengthening' },
+    { name: 'Guided Bone & Tissue Regeneration', path: '/guided-bone-regeneration' },
+    { name: 'Dental Implants', path: '/dental-implants' },
+    { name: 'Laser Therapy', path: '/laser-therapy' },
+    { name: 'LANAP', path: '/lanap' }
+  ];
+
   return (
     <nav
       ref={navRef}
@@ -36,12 +60,34 @@ const Navbar = () => {
         <a href="/#philosophy" className="transition-colors link-hover hover:text-accent">Philosophy</a>
         <a href="/#features" className="transition-colors link-hover hover:text-accent">Method</a>
         <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsServicesOpen(true)}
+          onMouseLeave={() => setIsServicesOpen(false)}
+        >
+          <button className="flex items-center gap-1 transition-colors link-hover hover:text-accent">
+            Services <ChevronDown className="w-3 h-3" />
+          </button>
+          {isServicesOpen && (
+            <div className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5">
+              {services.map((service, index) => (
+                <a
+                  key={index}
+                  href={service.path}
+                  className="block px-5 py-2.5 text-sm font-serif text-primary/80 hover:bg-accent/5 hover:text-accent transition-colors"
+                >
+                  {service.name}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <button
         onClick={() => window.open("https://book.modento.io/atlanta-periodontal-group", "_blank")}
         className="magnetic-button bg-gradient-to-r from-accent to-[#0ea5e9] text-white px-5 py-2 rounded-full font-sans font-medium text-sm flex items-center gap-2 shadow-[inset_0_2px_10px_rgba(255,255,255,0.4),0_5px_15px_rgba(6,182,212,0.3)]"
       >
-      <span className="relative z-10 block">Consultation</span>
+        <span className="relative z-10 block">Consultation</span>
       </button>
     </nav>
   );
@@ -467,6 +513,19 @@ const CTASection = () => {
 
 // --- 7. FOOTER ---
 const Footer = () => {
+  const services = [
+    { name: 'Periodontal Maintenance', path: '/periodontal-maintenance' },
+    { name: 'Scaling and Root Planing', path: '/scaling-root-planing' },
+    { name: 'Osseous Surgery', path: '/osseous-surgery' },
+    { name: 'Frenectomy', path: '/frenectomy' },
+    { name: 'Functional Crown Lengthening', path: '/crown-lengthening' },
+    { name: 'Aesthetic Crown Lengthening', path: '/aesthetic-crown-lengthening' },
+    { name: 'Guided Bone & Tissue Regeneration', path: '/guided-bone-regeneration' },
+    { name: 'Dental Implants', path: '/dental-implants' },
+    { name: 'Laser Therapy', path: '/laser-therapy' },
+    { name: 'LANAP', path: '/lanap' }
+  ];
+
   return (
     <footer className="bg-primary text-white rounded-t-[4rem] px-6 md:px-16 py-16 md:py-24 mt-24 shadow-[0_-20px_50px_rgba(15,23,42,0.1)]">
       <div className="flex flex-col justify-between gap-16 mx-auto max-w-7xl md:flex-row md:gap-8">
@@ -478,15 +537,28 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-12 font-sans text-sm">
+        <div className="grid grid-cols-2 gap-12 font-sans text-sm md:grid-cols-3">
           <div className="flex flex-col gap-4 text-white/70">
             <div className="mb-2 font-mono text-xs font-semibold tracking-widest text-white uppercase">Practice</div>
             <a href="/#philosophy" className="transition-colors link-hover hover:text-accent">Philosophy</a>
-            <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Methodology</a>
+            <a href="/#features" className="transition-colors link-hover hover:text-accent">Method</a>
+            <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
             <a href="https://www.google.com/search?q=Atlanta-Periodontal-Group#reviews" className="transition-colors link-hover hover:text-accent">Patient Reviews</a>
           </div>
+
           <div className="flex flex-col gap-4 text-white/70">
-            <div className="mb-2 font-mono text-xs font-semibold tracking-widest text-white uppercase">Legal</div>
+            <div className="mb-2 font-mono text-xs font-semibold tracking-widest text-white uppercase">Services</div>
+            {services.slice(0, 5).map((service, index) => (
+              <a key={index} href={service.path} className="transition-colors hover:text-accent">{service.name}</a>
+            ))}
+          </div>
+
+          <div className="flex flex-col gap-4 text-white/70">
+            <div className="mb-2 font-mono text-xs font-semibold tracking-widest text-white uppercase">More Services</div>
+            {services.slice(5).map((service, index) => (
+              <a key={index} href={service.path} className="transition-colors hover:text-accent">{service.name}</a>
+            ))}
+            <div className="mt-2 font-mono text-xs font-semibold tracking-widest text-white uppercase">Legal</div>
             <a href="/privacy" className="transition-colors hover:text-accent">Privacy Policy</a>
             <a href="/terms" className="transition-colors hover:text-accent">Terms of Service</a>
             <a href="/accessibility" className="transition-colors hover:text-accent">Accessibility</a>
@@ -516,6 +588,16 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/accessibility" element={<Accessibility />} />
+        <Route path="/lanap" element={<LANAP />} />
+        <Route path="/laser-therapy" element={<LaserTherapy />} />
+        <Route path="/dental-implants" element={<DentalImplants />} />
+        <Route path="/guided-bone-regeneration" element={<GuidedBoneTissueRegeneration />} />
+        <Route path="/aesthetic-crown-lengthening" element={<AestheticCrownLengthening />} />
+        <Route path="/crown-lengthening" element={<FunctionalCrownLengthening />} />
+        <Route path="/frenectomy" element={<Frenectomy />} />
+        <Route path="/osseous-surgery" element={<OsseousSurgery />} />
+        <Route path="/scaling-root-planing" element={<ScalingAndRootPlaning />} />
+        <Route path="/periodontal-maintenance" element={<PeriodontalMaintenance />} />
       </Routes>
     </BrowserRouter>
   );
