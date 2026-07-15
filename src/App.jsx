@@ -14,7 +14,7 @@ import AestheticCrownLengthening from './AestheticCrownLengthening';
 import FunctionalCrownLengthening from './FunctionalCrownLengthening';
 import Frenectomy from './Frenectomy';
 import OsseousSurgery from './OsseousSurgery';
-import ScalingAndRootPlaning from './ScalingAndRootPlaning';
+import ScalingAndRootPlaning from "./ScalingAndRootPlaning";  
 import PeriodontalMaintenance from './PeriodontalMaintenance';
 
 gsap.registerPlugin(ScrollTrigger);
