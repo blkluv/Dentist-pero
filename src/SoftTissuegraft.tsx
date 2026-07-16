@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, Scissors, ChevronDown,
-  Bone, TrendingDown, RefreshCw, Tooth, Syringe, Building2
+  Bone, TrendingDown, RefreshCw, User, Syringe, Building2
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -321,7 +321,7 @@ const OsseousSurgery = () => {
                 desc: "Chronic or recurrent gum infections that don't resolve with routine care."
               },
               {
-                icon: <Tooth className="w-8 h-8 text-accent" />,
+                icon: <User className="w-8 h-8 text-accent" />,
                 title: "Loose Teeth",
                 desc: "Teeth that have become mobile due to bone loss, threatening their long-term viability."
               },
