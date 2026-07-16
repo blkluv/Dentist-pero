@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, Sparkles, Zap, Heart, ChevronDown } from 'lucide-react';
+import { ChevronRight, CheckCircle2, Phone, MapPin, ChevronDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -287,7 +287,7 @@ const LANAP = () => {
         </div>
       </section>
 
-      {/* WHY CHOOSE LANAP - Section 2 */}
+      {/* WHY CHOOSE LANAP - Section 2 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -303,23 +303,23 @@ const LANAP = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
             {[
               {
-                icon: <Zap className="w-8 h-8 text-accent" />,
+                icon: "⚡",
                 title: "No Scalpel, No Sutures",
                 desc: "The laser does the cutting, so there is no bleeding and no need for stitches. Your treatment is gentle and precise."
               },
               {
-                icon: <Heart className="w-8 h-8 text-accent" />,
+                icon: "❤️",
                 title: "Regenerates Bone and Tissue",
                 desc: "LANAP stimulates the formation of new bone and periodontal ligament, reversing the damage of gum disease and restoring health."
               },
               {
-                icon: <Sparkles className="w-8 h-8 text-accent" />,
+                icon: "✨",
                 title: "Minimal Pain, Fast Recovery",
                 desc: "Most patients experience only mild discomfort and return to normal activities the same day, with significantly less downtime than traditional surgery."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                <div className="flex justify-center mb-4">{item.icon}</div>
+                <div className="mb-4 text-4xl">{item.icon}</div>
                 <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                 <p className="mt-2 font-serif text-primary/70">{item.desc}</p>
               </div>
@@ -404,7 +404,7 @@ const LANAP = () => {
         </div>
       </section>
 
-      {/* BENEFITS - Section 4 */}
+      {/* BENEFITS - Section 4 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -420,28 +420,28 @@ const LANAP = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-2">
             {[
               {
-                icon: <Shield className="w-6 h-6 text-accent" />,
+                icon: "🛡️",
                 title: "FDA-Cleared and Clinically Proven",
                 desc: "LANAP is the only laser procedure with FDA clearance for the treatment of gum disease and has been proven in clinical studies to regenerate bone and tissue."
               },
               {
-                icon: <Heart className="w-6 h-6 text-accent" />,
+                icon: "❤️",
                 title: "Stimulates New Bone Growth",
                 desc: "The laser promotes regeneration, meaning you can actually grow back bone and gum tissue lost to disease. This is a true restoration, not just a repair."
               },
               {
-                icon: <Clock className="w-6 h-6 text-accent" />,
+                icon: "⏱️",
                 title: "Rapid Recovery and Comfort",
                 desc: "Most patients resume normal activities the same day. No stitches to remove, no packing, and minimal post-operative discomfort."
               },
               {
-                icon: <CheckCircle2 className="w-6 h-6 text-accent" />,
+                icon: "✅",
                 title: "Preserves Healthy Tissue",
                 desc: "The laser targets only the diseased tissue, leaving healthy gums, bone, and teeth intact. This results in a more natural, comfortable outcome."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex gap-4">
-                <div className="flex-shrink-0 mt-1">{item.icon}</div>
+                <div className="flex-shrink-0 mt-1 text-3xl">{item.icon}</div>
                 <div>
                   <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                   <p className="mt-2 font-serif text-primary/70">{item.desc}</p>

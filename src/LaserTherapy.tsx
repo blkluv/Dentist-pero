@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, Sparkles, Zap, ChevronDown } from 'lucide-react';
+import { ChevronRight, CheckCircle2, Phone, MapPin, ChevronDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -287,7 +287,7 @@ const LaserTherapy = () => {
         </div>
       </section>
 
-      {/* WHY CHOOSE BIOLASE LASER - Section 2 */}
+      {/* WHY CHOOSE BIOLASE LASER - Section 2 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -303,23 +303,23 @@ const LaserTherapy = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
             {[
               {
-                icon: <Zap className="w-8 h-8 text-accent" />,
+                icon: "⚡",
                 title: "Precision Targeting",
                 desc: "The BIOLASE laser selectively removes diseased tissue while leaving healthy tissue intact, minimizing damage and maximizing results."
               },
               {
-                icon: <Shield className="w-8 h-8 text-accent" />,
+                icon: "🛡️",
                 title: "Minimally Invasive",
                 desc: "No incisions, no sutures, and significantly less bleeding than traditional surgery. Most patients experience only mild discomfort."
               },
               {
-                icon: <Sparkles className="w-8 h-8 text-accent" />,
+                icon: "✨",
                 title: "Faster Healing and Recovery",
                 desc: "The laser promotes tissue regeneration and reduces inflammation, so you heal faster and return to normal activities sooner."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                <div className="flex justify-center mb-4">{item.icon}</div>
+                <div className="mb-4 text-4xl">{item.icon}</div>
                 <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                 <p className="mt-2 font-serif text-primary/70">{item.desc}</p>
               </div>
@@ -404,7 +404,7 @@ const LaserTherapy = () => {
         </div>
       </section>
 
-      {/* BENEFITS - Section 4 */}
+      {/* BENEFITS - Section 4 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -420,28 +420,28 @@ const LaserTherapy = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-2">
             {[
               {
-                icon: <Shield className="w-6 h-6 text-accent" />,
+                icon: "🛡️",
                 title: "No Scalpel or Sutures",
                 desc: "The laser cuts and cauterizes at the same time, so there is no bleeding and no need for stitches."
               },
               {
-                icon: <Sparkles className="w-6 h-6 text-accent" />,
+                icon: "✨",
                 title: "Reduced Pain and Discomfort",
                 desc: "Most patients experience minimal post-operative pain and require only over-the-counter pain relievers."
               },
               {
-                icon: <Clock className="w-6 h-6 text-accent" />,
+                icon: "⏱️",
                 title: "Rapid Healing",
                 desc: "The laser promotes tissue regeneration and reduces inflammation, so you heal much faster than with conventional surgery."
               },
               {
-                icon: <CheckCircle2 className="w-6 h-6 text-accent" />,
+                icon: "✅",
                 title: "Highly Precise and Predictable",
                 desc: "The BIOLASE laser allows us to remove only the diseased tissue, preserving healthy gums and bone for optimal results."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex gap-4">
-                <div className="flex-shrink-0 mt-1">{item.icon}</div>
+                <div className="flex-shrink-0 mt-1 text-3xl">{item.icon}</div>
                 <div>
                   <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                   <p className="mt-2 font-serif text-primary/70">{item.desc}</p>
