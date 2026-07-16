@@ -1,14 +1,42 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Award, Smile, ChevronDown } from "lucide-react";
+import { ChevronRight, CheckCircle2, Phone, MapPin, ChevronDown } from "lucide-react";
+
 gsap.registerPlugin(ScrollTrigger);
 
-// --- NAVBAR with Services Dropdown ---
+// --- NAVBAR with Services Dropdown (fixed hover) ---
 const Navbar = () => {
   const navRef = useRef(null);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const closeTimeout = useRef(null);
 
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+      }
+    };
+  }, []);
+
+  // Handle mouse enter on the parent container (button + dropdown)
+  const handleMouseEnter = () => {
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
+    setIsServicesOpen(true);
+  };
+
+  // Handle mouse leave with a small delay to allow moving to dropdown
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 150);
+  };
+
+  // GSAP scroll effect for navbar
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -59,14 +87,18 @@ const Navbar = () => {
         <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
         <div 
           className="relative"
-          onMouseEnter={() => setIsServicesOpen(true)}
-          onMouseLeave={() => setIsServicesOpen(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <button className="flex items-center gap-1 transition-colors link-hover hover:text-accent">
             Services <ChevronDown className="w-3 h-3" />
           </button>
           {isServicesOpen && (
-            <div className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5">
+            <div 
+              className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               {services.map((service, index) => (
                 <a
                   key={index}
@@ -255,7 +287,7 @@ const DentalImplants = () => {
         </div>
       </section>
 
-      {/* WHO NEEDS DENTAL IMPLANTS - Section 2 */}
+      {/* WHO NEEDS DENTAL IMPLANTS - Section 2 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -271,33 +303,33 @@ const DentalImplants = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
             {[
               {
-                icon: <Tooth className="w-8 h-8 text-accent" />,
+                icon: "🦷",
                 title: "Single Missing Tooth",
                 desc: "A single implant with a crown replaces one missing tooth without affecting adjacent teeth, preserving your natural bite and smile."
               },
               {
-                icon: <Smile className="w-8 h-8 text-accent" />,
+                icon: "😊",
                 title: "Multiple Missing Teeth",
                 desc: "Implant-supported bridges or multiple implants can replace several missing teeth, restoring function and aesthetics."
               },
               {
-                icon: <CheckCircle2 className="w-8 h-8 text-accent" />,
+                icon: "✅",
                 title: "Full Arch Replacement",
                 desc: "For patients with complete tooth loss, implant-supported dentures (All-on-4) offer a permanent, stable solution that stays in place."
               },
               {
-                icon: <Shield className="w-8 h-8 text-accent" />,
+                icon: "🛡️",
                 title: "Failed Root Canals or Bridges",
                 desc: "When root canals or bridges fail, implants provide a more reliable, long-lasting alternative."
               },
               {
-                icon: <Award className="w-8 h-8 text-accent" />,
+                icon: "🏆",
                 title: "Loose or Uncomfortable Dentures",
                 desc: "Implant-retained dentures eliminate the discomfort and insecurity of traditional removable dentures."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                <div className="flex justify-center mb-4">{item.icon}</div>
+                <div className="mb-4 text-4xl">{item.icon}</div>
                 <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                 <p className="mt-2 font-serif text-primary/70">{item.desc}</p>
               </div>
@@ -382,7 +414,7 @@ const DentalImplants = () => {
         </div>
       </section>
 
-      {/* BENEFITS - Section 4 */}
+      {/* BENEFITS - Section 4 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -398,28 +430,28 @@ const DentalImplants = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-2">
             {[
               {
-                icon: <Tooth className="w-6 h-6 text-accent" />,
+                icon: "🦷",
                 title: "Natural Look and Feel",
                 desc: "Implants integrate with your bone, providing a stable foundation that looks, feels, and functions just like natural teeth."
               },
               {
-                icon: <Shield className="w-6 h-6 text-accent" />,
+                icon: "🛡️",
                 title: "Permanent Solution",
                 desc: "With proper care, dental implants can last a lifetime, unlike bridges or dentures that need replacement every 5–15 years."
               },
               {
-                icon: <CheckCircle2 className="w-6 h-6 text-accent" />,
+                icon: "✅",
                 title: "Preserves Jawbone Health",
                 desc: "Implants stimulate the bone, preventing the bone loss that occurs with missing teeth. This preserves your facial structure."
               },
               {
-                icon: <Award className="w-6 h-6 text-accent" />,
+                icon: "🏆",
                 title: "Enhanced Confidence and Quality of Life",
                 desc: "Eat, speak, and smile with confidence knowing your teeth are secure and natural-looking."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex gap-4">
-                <div className="flex-shrink-0 mt-1">{item.icon}</div>
+                <div className="flex-shrink-0 mt-1 text-3xl">{item.icon}</div>
                 <div>
                   <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                   <p className="mt-2 font-serif text-primary/70">{item.desc}</p>

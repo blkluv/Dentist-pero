@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CheckCircle2, ChevronRight, ChevronDown } from 'lucide-react';
@@ -609,24 +609,22 @@ const Footer = () => {
 // --- 8. MAIN APP WITH ROUTING ---
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsOfService />} />
-        <Route path="/accessibility" element={<Accessibility />} />
-        <Route path="/lanap" element={<Lanap />} />
-        <Route path="/laser-therapy" element={<LaserTherapy />} />
-        <Route path="/dental-implants" element={<DentalImplants />} />
-        <Route path="/guided-bone-regeneration" element={<GuidedBoneTissueRegeneration />} />
-        <Route path="/aesthetic-crown-lengthening" element={<AestheticCrownLengthening />} />
-        <Route path="/crown-lengthening" element={<FunctionalCrownLengthening />} />
-        <Route path="/frenectomy" element={<Frenectomy />} />
-        <Route path="/osseous-surgery" element={<OsseousSurgery />} />
-        <Route path="/scaling-root-planing" element={<ScalingAndRootPlaning />} />
-        <Route path="/periodontal-maintenance" element={<PeriodontalMaintenance />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/terms" element={<TermsOfService />} />
+      <Route path="/accessibility" element={<Accessibility />} />
+      <Route path="/lanap" element={<Lanap />} />
+      <Route path="/laser-therapy" element={<LaserTherapy />} />
+      <Route path="/dental-implants" element={<DentalImplants />} />
+      <Route path="/guided-bone-regeneration" element={<GuidedBoneTissueRegeneration />} />
+      <Route path="/aesthetic-crown-lengthening" element={<AestheticCrownLengthening />} />
+      <Route path="/crown-lengthening" element={<FunctionalCrownLengthening />} />
+      <Route path="/frenectomy" element={<Frenectomy />} />
+      <Route path="/osseous-surgery" element={<OsseousSurgery />} />
+      <Route path="/scaling-root-planing" element={<ScalingAndRootPlaning />} />
+      <Route path="/periodontal-maintenance" element={<PeriodontalMaintenance />} />
+    </Routes>
   );
 }
 

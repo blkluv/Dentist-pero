@@ -5,11 +5,38 @@ import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, Bone, 
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- NAVBAR with Services Dropdown ---
+// --- NAVBAR with Services Dropdown (fixed hover) ---
 const Navbar = () => {
   const navRef = useRef(null);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const closeTimeout = useRef(null);
 
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+      }
+    };
+  }, []);
+
+  // Handle mouse enter on the parent container (button + dropdown)
+  const handleMouseEnter = () => {
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
+    setIsServicesOpen(true);
+  };
+
+  // Handle mouse leave with a small delay to allow moving to dropdown
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 150);
+  };
+
+  // GSAP scroll effect for navbar
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -60,14 +87,18 @@ const Navbar = () => {
         <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
         <div 
           className="relative"
-          onMouseEnter={() => setIsServicesOpen(true)}
-          onMouseLeave={() => setIsServicesOpen(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <button className="flex items-center gap-1 transition-colors link-hover hover:text-accent">
             Services <ChevronDown className="w-3 h-3" />
           </button>
           {isServicesOpen && (
-            <div className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5">
+            <div 
+              className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               {services.map((service, index) => (
                 <a
                   key={index}

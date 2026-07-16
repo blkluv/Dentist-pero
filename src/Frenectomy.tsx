@@ -1,15 +1,42 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, Scissors, Baby, Mic, ChevronDown } from 'lucide-react';
+import { ChevronRight, CheckCircle2, Phone, MapPin, ChevronDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- NAVBAR with Services Dropdown ---
+// --- NAVBAR with Services Dropdown (fixed hover) ---
 const Navbar = () => {
   const navRef = useRef(null);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const closeTimeout = useRef(null);
 
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+      }
+    };
+  }, []);
+
+  // Handle mouse enter on the parent container (button + dropdown)
+  const handleMouseEnter = () => {
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
+    setIsServicesOpen(true);
+  };
+
+  // Handle mouse leave with a small delay to allow moving to dropdown
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 150);
+  };
+
+  // GSAP scroll effect for navbar
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -60,14 +87,18 @@ const Navbar = () => {
         <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
         <div 
           className="relative"
-          onMouseEnter={() => setIsServicesOpen(true)}
-          onMouseLeave={() => setIsServicesOpen(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <button className="flex items-center gap-1 transition-colors link-hover hover:text-accent">
             Services <ChevronDown className="w-3 h-3" />
           </button>
           {isServicesOpen && (
-            <div className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5">
+            <div 
+              className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               {services.map((service, index) => (
                 <a
                   key={index}
@@ -256,7 +287,7 @@ const Frenectomy = () => {
         </div>
       </section>
 
-      {/* WHO NEEDS A FRENECTOMY - Section 2 */}
+      {/* WHO NEEDS A FRENECTOMY - Section 2 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -272,23 +303,23 @@ const Frenectomy = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
             {[
               {
-                icon: <Baby className="w-8 h-8 text-accent" />,
+                icon: "👶",
                 title: "Infants & Newborns",
                 desc: "Difficulty breastfeeding, poor latch, colic, reflux, or failure to thrive due to tongue-tie or lip-tie."
               },
               {
-                icon: <Mic className="w-8 h-8 text-accent" />,
+                icon: "🗣️",
                 title: "Children & Adolescents",
                 desc: "Speech difficulties (lisp, articulation), orthodontic issues (gapped teeth), or difficulty eating certain foods."
               },
               {
-                icon: <Shield className="w-8 h-8 text-accent" />,
+                icon: "🧑‍⚕️",
                 title: "Adults",
                 desc: "Chronic jaw pain, tension headaches, gum recession, or difficulty with oral hygiene due to a tight frenum."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] text-center">
-                <div className="flex justify-center mb-4">{item.icon}</div>
+                <div className="mb-4 text-4xl">{item.icon}</div>
                 <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                 <p className="mt-2 font-serif text-primary/70">{item.desc}</p>
               </div>
@@ -389,7 +420,7 @@ const Frenectomy = () => {
         </div>
       </section>
 
-      {/* BENEFITS - Section 4 */}
+      {/* BENEFITS - Section 4 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -405,38 +436,38 @@ const Frenectomy = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
             {[
               {
-                icon: <Baby className="w-6 h-6 text-accent" />,
+                icon: "🍼",
                 title: "Improved Breastfeeding",
                 desc: "For infants, a frenectomy can resolve latch issues, reduce nipple pain, and ensure proper nutrition and weight gain."
               },
               {
-                icon: <Mic className="w-6 h-6 text-accent" />,
+                icon: "🗣️",
                 title: "Better Speech Development",
                 desc: "Releasing a tongue-tie can correct articulation issues like lisping or difficulty pronouncing certain sounds."
               },
               {
-                icon: <CheckCircle2 className="w-6 h-6 text-accent" />,
+                icon: "🪥",
                 title: "Enhanced Oral Hygiene",
                 desc: "A tight labial frenum can trap plaque and cause gum recession. Releasing it makes cleaning easier and protects your gums."
               },
               {
-                icon: <Shield className="w-6 h-6 text-accent" />,
+                icon: "😁",
                 title: "Reduced Orthodontic Complications",
                 desc: "Prevents gaps between teeth, reduces the need for braces, and helps maintain proper bite alignment."
               },
               {
-                icon: <Clock className="w-6 h-6 text-accent" />,
+                icon: "⏱️",
                 title: "Quick, Minimal Downtime",
                 desc: "The procedure is fast, and most patients resume normal activities the same day with only minor discomfort."
               },
               {
-                icon: <Award className="w-6 h-6 text-accent" />,
+                icon: "🏆",
                 title: "Long-Lasting Results",
                 desc: "Once the frenum is released, the functional improvements are permanent, with proper post-operative exercises."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex gap-4">
-                <div className="flex-shrink-0 mt-1">{item.icon}</div>
+                <div className="flex-shrink-0 mt-1 text-3xl">{item.icon}</div>
                 <div>
                   <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                   <p className="mt-2 font-serif text-primary/70">{item.desc}</p>

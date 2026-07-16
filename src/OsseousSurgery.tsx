@@ -1,15 +1,42 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, Scissors, ChevronDown } from 'lucide-react';
+import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Award, Scissors, ChevronDown, Bone, TrendingDown, RefreshCw, Syringe, Building2 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- NAVBAR with Services Dropdown ---
+// --- NAVBAR with Services Dropdown (fixed hover) ---
 const Navbar = () => {
   const navRef = useRef(null);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const closeTimeout = useRef(null);
 
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+      }
+    };
+  }, []);
+
+  // Handle mouse enter on the parent container (button + dropdown)
+  const handleMouseEnter = () => {
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
+    setIsServicesOpen(true);
+  };
+
+  // Handle mouse leave with a small delay to allow moving to dropdown
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 150);
+  };
+
+  // GSAP scroll effect for navbar
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -60,14 +87,18 @@ const Navbar = () => {
         <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
         <div 
           className="relative"
-          onMouseEnter={() => setIsServicesOpen(true)}
-          onMouseLeave={() => setIsServicesOpen(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <button className="flex items-center gap-1 transition-colors link-hover hover:text-accent">
             Services <ChevronDown className="w-3 h-3" />
           </button>
           {isServicesOpen && (
-            <div className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5">
+            <div 
+              className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               {services.map((service, index) => (
                 <a
                   key={index}
@@ -272,38 +303,38 @@ const OsseousSurgery = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
             {[
               {
-                icon: "🦴",
+                icon: <Bone className="w-8 h-8 text-accent" />,
                 title: "Deep Periodontal Pockets",
                 desc: "Pockets deeper than 5mm that persist after non-surgical treatment (scaling and root planing)."
               },
               {
-                icon: "📉",
+                icon: <TrendingDown className="w-8 h-8 text-accent" />,
                 title: "Significant Bone Loss",
                 desc: "X-rays show moderate to severe bone loss around teeth, compromising their stability."
               },
               {
-                icon: "🔄",
+                icon: <RefreshCw className="w-8 h-8 text-accent" />,
                 title: "Recurrent Infections",
                 desc: "Chronic or recurrent gum infections that don't resolve with routine care."
               },
               {
-                icon: "🦷",
+                icon: <Tooth className="w-8 h-8 text-accent" />,
                 title: "Loose Teeth",
                 desc: "Teeth that have become mobile due to bone loss, threatening their long-term viability."
               },
               {
-                icon: "💉",
+                icon: <Syringe className="w-8 h-8 text-accent" />,
                 title: "Unresponsive to Non-Surgical Care",
                 desc: "Scaling and root planing alone has not eliminated the disease or reduced pocket depths."
               },
               {
-                icon: "🏥",
+                icon: <Building2 className="w-8 h-8 text-accent" />,
                 title: "Preparation for Implants",
                 desc: "To create a healthy foundation for dental implants by removing diseased bone and tissue."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                <div className="mb-4 text-3xl">{item.icon}</div>
+                <div className="flex justify-center mb-4">{item.icon}</div>
                 <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                 <p className="mt-2 font-serif text-primary/70">{item.desc}</p>
               </div>

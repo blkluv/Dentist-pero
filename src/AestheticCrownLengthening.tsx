@@ -1,15 +1,42 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, Crown, Sparkles, ChevronDown } from 'lucide-react';
+import { ChevronRight, CheckCircle2, Phone, MapPin, ChevronDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- NAVBAR with Services Dropdown ---
+// --- NAVBAR with Services Dropdown (fixed hover) ---
 const Navbar = () => {
   const navRef = useRef(null);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const closeTimeout = useRef(null);
 
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+      }
+    };
+  }, []);
+
+  // Handle mouse enter on the parent container (button + dropdown)
+  const handleMouseEnter = () => {
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
+    setIsServicesOpen(true);
+  };
+
+  // Handle mouse leave with a small delay to allow moving to dropdown
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 150);
+  };
+
+  // GSAP scroll effect for navbar
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -60,14 +87,18 @@ const Navbar = () => {
         <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
         <div 
           className="relative"
-          onMouseEnter={() => setIsServicesOpen(true)}
-          onMouseLeave={() => setIsServicesOpen(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <button className="flex items-center gap-1 transition-colors link-hover hover:text-accent">
             Services <ChevronDown className="w-3 h-3" />
           </button>
           {isServicesOpen && (
-            <div className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5">
+            <div 
+              className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               {services.map((service, index) => (
                 <a
                   key={index}
@@ -256,7 +287,7 @@ const AestheticCrownLengthening = () => {
         </div>
       </section>
 
-      {/* WHO BENEFITS FROM AESTHETIC CROWN LENGTHENING - Section 2 */}
+      {/* WHO BENEFITS FROM AESTHETIC CROWN LENGTHENING - Section 2 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -272,33 +303,33 @@ const AestheticCrownLengthening = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
             {[
               {
-                icon: <Sparkles className="w-8 h-8 text-accent" />,
+                icon: "✨",
                 title: "Excessive Gingival Display (Gummy Smile)",
                 desc: "When your gums cover more than 2–3mm of your teeth, aesthetic crown lengthening can create a more balanced proportion."
               },
               {
-                icon: <Crown className="w-8 h-8 text-accent" />,
+                icon: "👑",
                 title: "Short, Box-Looking Teeth",
                 desc: "If your teeth appear small or square due to excess gum tissue, we can lengthen them to create a more youthful, elongated appearance."
               },
               {
-                icon: <Award className="w-8 h-8 text-accent" />,
+                icon: "🏆",
                 title: "Uneven Gum Line",
                 desc: "An asymmetrical gum line can be corrected for a more harmonious and symmetrical smile."
               },
               {
-                icon: <Shield className="w-8 h-8 text-accent" />,
+                icon: "🛡️",
                 title: "Before Veneers or Cosmetic Bonding",
                 desc: "Exposing more tooth structure creates a better surface for veneers or bonding, ensuring a seamless and natural result."
               },
               {
-                icon: <CheckCircle2 className="w-8 h-8 text-accent" />,
+                icon: "✅",
                 title: "General Cosmetic Enhancement",
                 desc: "Even without a severe condition, many patients choose aesthetic crown lengthening to achieve the perfect smile they've always wanted."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                <div className="flex justify-center mb-4">{item.icon}</div>
+                <div className="mb-4 text-4xl">{item.icon}</div>
                 <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                 <p className="mt-2 font-serif text-primary/70">{item.desc}</p>
               </div>
@@ -383,7 +414,7 @@ const AestheticCrownLengthening = () => {
         </div>
       </section>
 
-      {/* BENEFITS - Section 4 */}
+      {/* BENEFITS - Section 4 (with emojis) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -399,28 +430,28 @@ const AestheticCrownLengthening = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-2">
             {[
               {
-                icon: <Sparkles className="w-6 h-6 text-accent" />,
+                icon: "✨",
                 title: "Dramatic Smile Transformation",
                 desc: "By revealing more of your natural tooth structure, your smile becomes brighter, more symmetrical, and more youthful."
               },
               {
-                icon: <CheckCircle2 className="w-6 h-6 text-accent" />,
+                icon: "✅",
                 title: "Permanent, Natural Results",
                 desc: "Once healed, the results are permanent. Your new gum line is stable and will not recede or shift."
               },
               {
-                icon: <Shield className="w-6 h-6 text-accent" />,
+                icon: "🛡️",
                 title: "Improved Confidence and Self-Esteem",
                 desc: "A smile you're proud of can positively impact every aspect of your life, from professional to personal."
               },
               {
-                icon: <Award className="w-6 h-6 text-accent" />,
+                icon: "🏆",
                 title: "Minimal Downtime",
                 desc: "Most patients return to normal activities within a few days, and the results are worth the short recovery period."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex gap-4">
-                <div className="flex-shrink-0 mt-1">{item.icon}</div>
+                <div className="flex-shrink-0 mt-1 text-3xl">{item.icon}</div>
                 <div>
                   <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                   <p className="mt-2 font-serif text-primary/70">{item.desc}</p>

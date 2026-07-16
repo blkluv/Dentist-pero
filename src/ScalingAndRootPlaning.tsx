@@ -1,15 +1,42 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, ChevronDown } from 'lucide-react';
+import { ChevronRight, CheckCircle2, Phone, MapPin, Shield, Clock, Award, ChevronDown, Droplet, Wind, Eye, Frown, Circle } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- NAVBAR with Services Dropdown ---
+// --- NAVBAR with Services Dropdown (fixed hover) ---
 const Navbar = () => {
   const navRef = useRef(null);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const closeTimeout = useRef(null);
 
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+      }
+    };
+  }, []);
+
+  // Handle mouse enter on the parent container (button + dropdown)
+  const handleMouseEnter = () => {
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
+    setIsServicesOpen(true);
+  };
+
+  // Handle mouse leave with a small delay to allow moving to dropdown
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 150);
+  };
+
+  // GSAP scroll effect for navbar
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -60,14 +87,18 @@ const Navbar = () => {
         <a href="/#protocol" className="transition-colors link-hover hover:text-accent">Protocol</a>
         <div 
           className="relative"
-          onMouseEnter={() => setIsServicesOpen(true)}
-          onMouseLeave={() => setIsServicesOpen(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <button className="flex items-center gap-1 transition-colors link-hover hover:text-accent">
             Services <ChevronDown className="w-3 h-3" />
           </button>
           {isServicesOpen && (
-            <div className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5">
+            <div 
+              className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               {services.map((service, index) => (
                 <a
                   key={index}
@@ -256,7 +287,7 @@ const ScalingAndRootPlaning = () => {
         </div>
       </section>
 
-      {/* SIGNS YOU NEED SCALING AND ROOT PLANING - Section 2 */}
+      {/* SIGNS YOU NEED SCALING AND ROOT PLANING - Section 2 (with Lucide icons) */}
       <section className="px-6 py-16 bg-primary/5 md:py-24 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center section-animate">
@@ -272,38 +303,38 @@ const ScalingAndRootPlaning = () => {
           <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
             {[
               {
-                icon: "🩸",
+                icon: <Droplet className="w-8 h-8 text-accent" />,
                 title: "Bleeding Gums",
                 desc: "Gums that bleed when you brush or floss are one of the earliest signs of gum disease."
               },
               {
-                icon: "😤",
+                icon: <Wind className="w-8 h-8 text-accent" />,
                 title: "Persistent Bad Breath",
                 desc: "Chronic halitosis can be a sign of bacterial infection in the gum pockets."
               },
               {
-                icon: "🫣",
+                icon: <Eye className="w-8 h-8 text-accent" />,
                 title: "Receding Gums",
                 desc: "Gums that pull away from your teeth expose root surfaces and create deep pockets."
               },
               {
-                icon: "🦷",
+                icon: <Tooth className="w-8 h-8 text-accent" />,
                 title: "Loose Teeth",
                 desc: "Bone loss from advanced gum disease can cause teeth to shift or become mobile."
               },
               {
-                icon: "😣",
+                icon: <Frown className="w-8 h-8 text-accent" />,
                 title: "Tender or Swollen Gums",
                 desc: "Inflamed gum tissue is a classic sign of active periodontal infection."
               },
               {
-                icon: "🔴",
+                icon: <Circle className="w-8 h-8 text-accent" />,
                 title: "Red or Dark Gums",
                 desc: "Healthy gums are pink. Red, dark, or purplish gums indicate inflammation."
               }
             ].map((item, i) => (
               <div key={i} className="section-animate bg-white p-8 rounded-3xl border border-primary/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                <div className="mb-4 text-3xl">{item.icon}</div>
+                <div className="flex justify-center mb-4">{item.icon}</div>
                 <h3 className="font-sans text-xl font-bold text-primary">{item.title}</h3>
                 <p className="mt-2 font-serif text-primary/70">{item.desc}</p>
               </div>
