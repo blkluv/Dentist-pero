@@ -7,14 +7,14 @@ import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfService from './TermsOfService';
 import Accessibility from './Accessibility';
 import Lanap from './Lanap';
-import DentalImplants from './DentalImplants';
-import ScalingAndRootPlaning from "./ScalingAndRootPlaning";
 import LaserTherapy from './LaserTherapy';
+import DentalImplants from './DentalImplants';
 import GuidedBoneTissueRegeneration from './GuidedBoneTissueRegeneration';
 import AestheticCrownLengthening from './AestheticCrownLengthening';
 import FunctionalCrownLengthening from './FunctionalCrownLengthening';
 import Frenectomy from './Frenectomy';
 import OsseousSurgery from './OsseousSurgery';
+import ScalingAndRootPlaning from "./ScalingAndRootPlaning";  
 import PeriodontalMaintenance from './PeriodontalMaintenance';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -25,7 +25,6 @@ const Navbar = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const closeTimeout = useRef(null);
 
-  // Clear timeout on unmount
   useEffect(() => {
     return () => {
       if (closeTimeout.current) {
@@ -34,7 +33,6 @@ const Navbar = () => {
     };
   }, []);
 
-  // Handle mouse enter on the parent container (button + dropdown)
   const handleMouseEnter = () => {
     if (closeTimeout.current) {
       clearTimeout(closeTimeout.current);
@@ -43,14 +41,12 @@ const Navbar = () => {
     setIsServicesOpen(true);
   };
 
-  // Handle mouse leave with a small delay
   const handleMouseLeave = () => {
     closeTimeout.current = setTimeout(() => {
       setIsServicesOpen(false);
     }, 150);
   };
 
-  // GSAP scroll effect for navbar
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -98,8 +94,8 @@ const Navbar = () => {
           {isServicesOpen && (
             <div 
               className="absolute left-0 w-64 py-2 mt-2 overflow-hidden bg-white border shadow-xl top-full rounded-2xl border-primary/5"
-              onMouseEnter={handleMouseEnter}   // keep open when hovering dropdown
-              onMouseLeave={handleMouseLeave}  // delay close
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               {services.map((service, index) => (
                 <a
@@ -619,8 +615,7 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/accessibility" element={<Accessibility />} />
-        {/* Uncomment below and create the corresponding files to enable these pages */}
-        {/* <Route path="/lanap" element={<LANAP />} /> */}
+        <Route path="/lanap" element={<Lanap />} />
         <Route path="/laser-therapy" element={<LaserTherapy />} />
         <Route path="/dental-implants" element={<DentalImplants />} />
         <Route path="/guided-bone-regeneration" element={<GuidedBoneTissueRegeneration />} />
@@ -628,7 +623,7 @@ function App() {
         <Route path="/crown-lengthening" element={<FunctionalCrownLengthening />} />
         <Route path="/frenectomy" element={<Frenectomy />} />
         <Route path="/osseous-surgery" element={<OsseousSurgery />} />
-        {/* <Route path="/scaling-root-planing" element={<ScalingAndRootPlaning />} /> */}
+        <Route path="/scaling-root-planing" element={<ScalingAndRootPlaning />} />
         <Route path="/periodontal-maintenance" element={<PeriodontalMaintenance />} />
       </Routes>
     </BrowserRouter>
