@@ -7,14 +7,14 @@ import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfService from './TermsOfService';
 import Accessibility from './Accessibility';
 import Lanap from './Lanap';
-import LaserTherapy from './LaserTherapy';
 import DentalImplants from './DentalImplants';
+import ScalingAndRootPlaning from "./ScalingAndRootPlaning";
+import LaserTherapy from './LaserTherapy';
 import GuidedBoneTissueRegeneration from './GuidedBoneTissueRegeneration';
 import AestheticCrownLengthening from './AestheticCrownLengthening';
 import FunctionalCrownLengthening from './FunctionalCrownLengthening';
 import Frenectomy from './Frenectomy';
 import OsseousSurgery from './OsseousSurgery';
-import ScalingAndRootPlaning from "./ScalingAndRootPlaning";  
 import PeriodontalMaintenance from './PeriodontalMaintenance';
 
 gsap.registerPlugin(ScrollTrigger);
