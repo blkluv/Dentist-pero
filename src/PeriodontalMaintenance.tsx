@@ -184,7 +184,7 @@ const PeriodontalMaintenance = () => {
       <section ref={heroRef} className="relative w-full min-h-[90vh] overflow-hidden flex items-end pb-24 md:pb-32 px-6 md:px-16 bg-white">
         <div className="absolute inset-0 z-0 bg-[#F8FAFC]">
           <img
-            src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop"
+            src="https://i.imgur.com/BPiVuyf.jpeg?q=80&w=2600&auto=format&fit=crop"
             alt="Periodontal Maintenance Therapy Atlanta GA - Professional Dental Care"
             className="object-cover w-full h-full opacity-30 mix-blend-multiply filter grayscale"
           />

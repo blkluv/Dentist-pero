@@ -142,7 +142,7 @@ const Hero = () => {
     <section ref={containerRef} className="relative w-full h-[100dvh] overflow-hidden flex items-end pb-24 md:pb-32 px-6 md:px-16 bg-white">
       <div className="absolute inset-0 z-0 bg-[#F8FAFC]">
         <img
-          src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop"
+          src="https://i.imgur.com/BPiVuyf.jpeg?q=80&w=2600&auto=format&fit=crop"
           alt="Abstract clinical environment"
           className="object-cover w-full h-full opacity-30 mix-blend-multiply filter grayscale"
         />
@@ -418,7 +418,7 @@ const Protocol = () => {
       num: '01',
       title: 'Comprehensive Periodontal Evaluation',
       desc: 'Advanced 3D imaging, digital diagnostics, and a comprehensive assessment of your gums, bone, and oral health to develop a treatment plan tailored to you.',
-      image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop',
+      image: 'https://i.imgur.com/BPiVuyf.jpeg?q=80&w=2600&auto=format&fit=crop',
       RenderVisual: () => (
         <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]">
           <g className="animate-[spin_15s_linear_infinite]" style={{ transformOrigin: 'center' }}>

@@ -205,7 +205,7 @@ const ScalingAndRootPlaning = () => {
       >
         <div className="absolute inset-0 z-0 bg-[#F8FAFC]">
           <img
-            src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop"
+            src="https://i.imgur.com/BPiVuyf.jpeg?q=80&w=2600&auto=format&fit=crop"
             alt="Scaling and Root Planing Atlanta GA - Deep Cleaning Treatment"
             className="object-cover w-full h-full opacity-30 mix-blend-multiply filter grayscale"
           />

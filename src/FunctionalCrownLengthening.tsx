@@ -270,7 +270,7 @@ const FunctionalCrownLengthening = () => {
           <div className="flex items-center justify-center section-animate">
             <div className="relative w-full aspect-[4/3] bg-primary/5 rounded-3xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2600&auto=format&fit=crop"
+                src="https://i.imgur.com/BPiVuyf.jpeg?q=80&w=2600&auto=format&fit=crop"
                 alt="Functional crown lengthening treatment Atlanta GA"
                 className="object-cover w-full h-full filter grayscale opacity-60"
               />
